@@ -2,7 +2,7 @@ import React, {
   Component
 } from 'react'
 
-import nfToken from '@/contracts/nfToken-factory'
+import nfToken from '@/contracts/nftoken-factory'
 
 import Hero from '@/components/hero'
 import TokenRow from './token-row'
@@ -27,6 +27,7 @@ export default class PurchaseHistory extends Component {
     nfToken().then((instance) => {
       instance.myTokens().then((result) => {
         this.setState({ tokens: result })
+        // this.setState({ tokens: result.reverse() })
       }).catch((error) => {
         console.error(error)
       })

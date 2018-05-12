@@ -40,9 +40,9 @@ Apt on Linux:
 
 4. Use `direnv allow` to export the env vars into your current terminal shell.
 
-### Ganache
+### Ganache (CLI)
 
-Create a directory for Ganache to store it's database in:
+Create a directory for ganache-cli to store it's database in:
 
 `mkdir .ganache`
 
@@ -50,15 +50,11 @@ Create a directory for Ganache to store it's database in:
 
 `truffle compile`
 
-(Sometimes this hangs for me at the end. You can cancel it and double-check the contents of your ./build/contracts/* folder)
-
 ### Migrate the Contracts
 
-This project is using a custom truffle migration tool available on NPM:
+This will deploy the contract to the network (tip: use --network=ropsten to deploy to Ethereum's Ropsten Testnet)
 
-`truffle-migrate-off-chain`
-
-(Sometimes this hangs for me at the end. You can cancel the process and check the contents of the JSON files written in the ./networks/* folder)
+`truffle migrate`
 
 # Run the Project
 
@@ -83,9 +79,22 @@ Why is there both a truffle and truffle-config file?
 
 ## TODO:
 
-* Make into a truffle box and submit to trufflesuite
 * On successful purchase, show a message about the new purchase and how it needs to be confirmed by the network, and redirect to show the now confirming token on Purchase History or My Tokens page
+* Deploy to Netlify & Ropsten, use Infura
 
+## Nice-to-haves:
+
+* Use a local web3 (1.0.0.beta?) instead of the current MetaMask/browser's web3 instance (which is deprecated)
+* Mock out a web3 object in the integration spec and test the happy path of filling out the form and purchasing a token via enzyme
+* Get `circleci` branch up and running, put a badge on the README for test runs
+* Switch all .jsx to simply .js
+* If the user switches their MetaMask account, need to refresh the page or stop/restart event listeners with new wallet address
+* Demo how ERC721 expects you to store data (such as the JSON response when the tokenURI is requested) as per https://eips.ethereum.org/EIPS/eip-721 (For instance, OpenSea has a server which takes a contract address and tokenID, which then does a GET request to the tokenURI to pull more info (as JSON) about the token (images, name, etc), for example: https://opensea-api.herokuapp.com/events/?asset_contract_address=0x06012c8cf97bead5deae237070f9587f8e7a266d&token_id=389343)
+* Fix getting duplicate entries when Ropsten returns the BoughtToken event (active subscriber listening for events in browser)
+
+## Done:
+
+* ~~Make into a truffle box and submit to trufflesuite~~
 * ~~BUG: Purchase History only showing some purchases while My Tokens shows more ... ?~~
 * ~~Show token ID / transaction ID on purchase history and Tokens#show page~~
 * ~~Make sure 'Purchase History' page works~~
@@ -93,15 +102,6 @@ Why is there both a truffle and truffle-config file?
 * ~~Make all React prop types required (isRequired) and provide defaultProps for those that are not~~
 * ~~Convert all css to scss~~
 * ~~Improve mobile styling / media query support~~
-
-## Nice-to-haves:
-
-* Mock out a web3 object in the integration spec and test the happy path of filling out the form and purchasing a token via enzyme
-* Get `circleci` branch up and running, put a badge on the README for test runs
-* Switch all .jsx to simply .js
-* If the user switches their MetaMask account, need to refresh the page or stop/restart event listeners with new wallet address
-* Demo how ERC721 expects you to store data (such as the JSON response when the tokenURI is requested) as per https://eips.ethereum.org/EIPS/eip-721 (For instance, OpenSea has a server which takes a contract address and tokenID, which then does a GET request to the tokenURI to pull more info (as JSON) about the token (images, name, etc), for example: https://opensea-api.herokuapp.com/events/?asset_contract_address=0x06012c8cf97bead5deae237070f9587f8e7a266d&token_id=389343)
-
 
 #### Gratitude
 
